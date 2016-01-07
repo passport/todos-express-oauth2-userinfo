@@ -6,6 +6,7 @@ var Strategy = require('passport-oauth2-userinfo').Strategy;
 passport.use(new Strategy({
     authorizationURL: 'http://127.0.0.1:3001/oauth2/authorize',
     tokenURL: 'http://127.0.0.1:8080/token',
+    userProfileURL: 'http://127.0.0.1:8081/userinfo',
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: 'http://localhost:3000/return'
