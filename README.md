@@ -17,7 +17,7 @@ $ npm install
 This app must be configured with an OAuth 2.0 authorization server (AS)'s
 endpoints, as well as a client ID and secret that has been issued by the AS.
 
-The endpoints should be set as options to `OpenIDConnectStrategy` in
+The endpoints should be set as options to `OAuth2UserInfoStrategy` in
 [routes/auth.js](https://github.com/passport/todos-express-oauth2-userinfo/blob/master/routes/auth.js#L7-L9).
 
 Once the client ID and secret have been obtained, create a `.env` file and add
