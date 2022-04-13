@@ -4,12 +4,12 @@ var Strategy = require('passport-oauth2-userinfo').Strategy;
 
 
 passport.use(new Strategy({
-    authorizationURL: 'http://127.0.0.1:3001/oauth2/authorize',
-    tokenURL: 'http://127.0.0.1:8080/token',
-    userProfileURL: 'http://127.0.0.1:8081/userinfo',
+    authorizationURL: 'http://localhost:8080/oauth2/authorize',
+    tokenURL: 'http://localhost:8080/oauth2/token',
+    userProfileURL: 'http://localhost:8080/userinfo',
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/return'
+    callbackURL: 'http://localhost:3000/oauth2/redirect'
   },
   function(accessToken, refreshToken, profile, cb) {
     return cb(null, profile);
@@ -59,7 +59,7 @@ app.get('/login',
 app.get('/login/oauth2',
   passport.authenticate('oauth2'));
 
-app.get('/return', 
+app.get('/oauth2/redirect',
   passport.authenticate('oauth2', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
