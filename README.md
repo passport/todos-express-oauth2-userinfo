@@ -1,29 +1,66 @@
-This example demonstrates how to use [Express](http://expressjs.com/) 4.x and
-[Passport](http://passportjs.org/) to authenticate users via OAuth 2.0.  Use
-this example as a starting point for your own web applications.
+# todos-express-oauth2-userinfo
 
-Note that OAuth 2.0 does not define a standard way to represent user profile
-information.  This particular strategy uses the schema from OpenID Connect's
-UserInfo endpoint, to overcome that limitation.
+This app illustrates how to use [Passport](https://www.passportjs.org/) with
+[Express](https://expressjs.com/) to sign users in via OAuth 2.0.  Use this
+example as a starting point for your own web applications.
 
-## Instructions
+## Quick Start
 
-To install this example on your computer, clone the repository and install
-dependencies.
+To run this app, clone the repository and install dependencies:
 
 ```bash
-$ git clone git@github.com:passport/express-4.x-oauth2-userinfo-example.git
-$ cd express-4.x-oauth2-userinfo-example
+$ git clone https://github.com/passport/todos-express-oauth2-userinfo.git
+$ cd todos-express-oauth2-userinfo
 $ npm install
 ```
 
-The example uses environment variables to configure the client ID and
-client secret needed to access the OAuth 2.0 protected API.  Start the server
-with those variables set to the appropriate credentials.
+This app must be configured with an OAuth 2.0 authorization server (AS)'s
+endpoints, as well as a client ID and secret that has been issued by the AS.
 
-```bash
-$ CLIENT_ID=__OAUTH2_CLIENT_ID__ CLIENT_SECRET=__OAUTH2_CLIENT_SECRET__ node server.js
+The endpoints should be set as options to `OpenIDConnectStrategy` in
+[routes/auth.js](https://github.com/passport/todos-express-oauth2-userinfo/blob/master/routes/auth.js#L7-L9).
+
+Once the client ID and secret have been obtained, create a `.env` file and add
+the following environment variables:
+
+```
+CLIENT_ID=__INSERT_CLIENT_ID_HERE__
+CLIENT_SECRET=__INSERT_CLIENT_SECRET_HERE__
 ```
 
-Open a web browser and navigate to [http://localhost:3000/](http://localhost:3000/)
-to see the example in action.
+Start the server.
+
+```bash
+$ npm start
+```
+
+Navigate to [`http://localhost:3000`](http://localhost:3000).
+
+## Overview
+
+This example illustrates how to use Passport and the [`passport-oauth2-userinfo`](https://github.com/jaredhanson/passport-oauth2-userinfo)
+strategy within an Express application to sign users in via OAuth 2.0.  Note
+that OAuth 2.0 does not define a standard way to represent user profile
+information.  This particular strategy uses the schema from OpenID Connect's
+UserInfo endpoint to overcome that limitation.
+
+This app implements the features of a typical [TodoMVC](https://todomvc.com/)
+app, and adds sign in functionality.  This app is a traditional web application,
+in which all application logic and data persistence is handled on the server.
+
+User interaction is performed via HTML pages and forms, which are rendered via
+[EJS](https://ejs.co/) templates and styled with vanilla CSS.  Data is stored in
+and queried from a [SQLite](https://www.sqlite.org/) database.
+
+After users sign in, a login session is established and maintained between the
+server and the browser with a cookie.  As authenticated users interact with the
+app, creating and editing todo items, the login state is restored by
+authenticating the session.
+
+## License
+
+[The Unlicense](https://opensource.org/licenses/unlicense)
+
+## Credit
+
+Created by [Jared Hanson](https://www.jaredhanson.me/)
