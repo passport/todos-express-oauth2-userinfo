@@ -10,7 +10,7 @@ passport.use(new OAuth2UserInfoStrategy({
   clientID: process.env['CLIENT_ID'],
   clientSecret: process.env['CLIENT_SECRET'],
   callbackURL: 'http://localhost:3000/oauth2/redirect'
-}, function(accessToken, refreshToken, profile, cb) {
+}, function verify(accessToken, refreshToken, profile, cb) {
   return cb(null, profile);
 }));
 
